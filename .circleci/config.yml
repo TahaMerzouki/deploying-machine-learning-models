@@ -274,6 +274,7 @@ workflows:
           filters:
             branches:
               only:
+                - main
                 - master
                 - demo
       # upload after git tags are created
