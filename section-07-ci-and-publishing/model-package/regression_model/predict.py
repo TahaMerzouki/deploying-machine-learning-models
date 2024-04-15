@@ -25,9 +25,10 @@ def make_prediction(
     if not errors:
         predictions = _price_pipe.predict(
             X=validated_data[config.model_config.features]
-        )
+        )  
+        dtype = np.result_type(np.float32, predictions)
         results = {
-            "predictions": [np.exp(pred) for pred in predictions],  # type: ignore
+            "predictions": [np.exp(pred).astype(dtype) for pred in predictions],  # type: ignore
             "version": _version,
             "errors": errors,
         }
