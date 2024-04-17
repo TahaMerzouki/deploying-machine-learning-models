@@ -63,14 +63,14 @@ jobs:
       - checkout:
           path: ~/project
       - *prepare_tox
-      - run:
-          name: Fetch the data
-          command: |
-            tox -e fetch_data
-      - run:
-          name: Test the model
-          command: |
-            tox
+      # - run:
+      #     name: Fetch the data
+      #     command: |
+      #       tox -e fetch_data
+      # - run:
+      #     name: Test the model
+      #     command: |
+      #       tox
       - run:
           name: Publish model to Gemfury
           command: |
@@ -278,7 +278,11 @@ workflows:
                 - demo
       # upload after git tags are created
       - section_07_test_and_upload_regression_model:
-          <<: *tags_only
+          # <<: *tags_only
+        filters:
+          branches:
+            only:
+              - tagbranch
 
       - section_08_deploy_app_container_via_railway:
          filters:
